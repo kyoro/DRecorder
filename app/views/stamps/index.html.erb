@@ -1,0 +1,11 @@
+<h1>チェックイン履歴</h1>
+<p></p>
+
+
+<% @stamps.each do |stamp| %>
+<div class="alert alert-info">
+<%= stamp.user.username %> さん (<%= stamp.created_at.strftime("%Y-%m-%d %H:%M:%S") %>)
+</div>
+
+
+<% end %>

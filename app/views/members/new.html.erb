@@ -1,0 +1,32 @@
+<h1>新しいメンバーの登録</h1>
+<p></p>
+<p>はじめまして！あなたのカードを新規メンバーとして登録します。</p>
+<hr />
+<%= form_tag members_path, {:method => :post} do %>
+  <div>
+    <input type="hidden" name="idm" value="<%=@idm %>" />
+    <label>あなたの名前</label>
+    <input type="text" class="span3" placeholder="日本語可、ニックネーム可" name="username" id="username"/>
+
+    <label>メールアドレス</label>
+    <input type="text" class="span3" placeholder="Gravatarで顔写真を設定できます" name="email" id="email"/>
+
+    <label>パスワード</label>
+    <input type="password" class="span3" placeholder="" name="password" id="password"/>
+  </div>  
+  <div class="form-actions">
+    <input type="submit" class="btn btn-primary" value="新規登録" onclick="return checkValues();"/>
+  </div>
+<% end %>
+
+<script>
+  checkValues = function(){
+    if($("#username").val() == '' ||  $("#email").val() == '' ||  $("#password").val() == ''){
+      alert('未入力項目があります');
+      return false;
+    }else{
+      return true;
+    }
+  };
+
+</script>

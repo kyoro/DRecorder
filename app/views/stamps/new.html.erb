@@ -1,0 +1,58 @@
+<div class="alert alert-success" id="alert_disp" style="display:none;">
+</div>
+
+<div class="hero-unit" style="text-align:center;">
+<h1 id="disp">Please Touch</h1>
+<p></p>
+<p>カードをリーダにかざしてください</p>
+</div>
+
+
+<script language="JavaScript">
+
+  fetchId = function(){
+    $("<script>")
+      .attr('id', 'jsonp-script')
+      .attr('type', 'text/javascript')
+      .attr('src', "http://localhost:3501/method/read")
+      .appendTo($("body"));
+  }
+
+  readTag = function(params){
+    if(params['error'] == 'false'){
+      var idm = params['IDm'];
+      $.post(
+          '/stamps/checkin',
+          {'idm':idm},
+          function(data, status) {
+            if(data['error'] == 'true'){
+              $('#disp').html("?");
+              document.location = "/members/new?idm=" + idm; 
+            }else{
+              $('#disp').html('ようこそ ' + data['name'] + ' さん');
+              $('#alert_disp').html('ようこそ ' + data['name'] + ' さん');
+              $('#alert_disp').show();
+            }
+
+          }
+          );
+      
+      //$('#disp').html(params['IDm']);
+
+
+
+
+
+
+      //document.location = "/members/new?idm=" + params['IDm']; 
+    }else{
+      $('#disp').html("Please Touch");
+    };
+    $('#jsonp-script').remove();
+  };
+  timer = setInterval("fetchId()",1000);
+
+
+
+</script>
+
